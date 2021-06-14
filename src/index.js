@@ -25,5 +25,9 @@ function renderGalleryImages() {
   imagesApiService.fetchImages().then(images => {
     const imagesMarkup = imageCardTpl(images);
     refs.gallery.insertAdjacentHTML('beforeend', imagesMarkup);
+    refs.btn.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
   });
 }
