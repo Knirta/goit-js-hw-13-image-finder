@@ -22,13 +22,21 @@ function onBtnClick(e) {
 }
 
 function renderGalleryImages() {
+  const lastElOfGallery = refs.gallery.lastElementChild;
   imagesApiService.fetchImages().then(images => {
     const imagesMarkup = imageCardTpl(images);
     refs.gallery.insertAdjacentHTML('beforeend', imagesMarkup);
     refs.btn.classList.remove('is-hidden');
-    refs.btn.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end',
-    });
+    if (lastElOfGallery) {
+      scrollToTop(lastElOfGallery);
+    }
+  });
+}
+
+function scrollToTop(el) {
+  const firstElOfNextPage = el.nextElementSibling;
+  firstElOfNextPage.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
   });
 }
